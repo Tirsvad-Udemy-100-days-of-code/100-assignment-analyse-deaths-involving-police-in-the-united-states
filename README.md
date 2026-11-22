@@ -87,6 +87,12 @@ powershell -File scripts/opengrep.ps1
 
 One screenshot per lecture step is added as each step is finished. Each step has a wiki page in English, Danish and Bahasa Malaysia that explains what the step taught.
 
+### Steps 1 and 2: data exploration and cleaning
+
+![Step 1: raw data exploration](docs/screenshots/step-01-data-exploration.png)
+
+![Step 2: data after cleaning](docs/screenshots/step-02-data-cleaning.png)
+
 ## 📄 License
 
 GNU Affero General Public License v3.0, see [LICENSE][license].
