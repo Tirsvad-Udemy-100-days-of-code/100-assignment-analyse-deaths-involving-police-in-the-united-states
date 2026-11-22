@@ -109,6 +109,22 @@ One screenshot per lecture step is added as each step is finished. Each step has
 
 ![Step 8: people killed by race](docs/screenshots/step-08-deaths-by-race.png)
 
+### Steps 9 to 15: who the people killed were
+
+![Step 9: deaths by gender](docs/screenshots/step-09-deaths-by-gender.png)
+
+![Step 10: age distribution](docs/screenshots/step-10-age-distribution.png)
+
+![Step 11: age by manner of death](docs/screenshots/step-11-age-by-manner-of-death.png)
+
+![Step 12: armed and unarmed](docs/screenshots/step-12-armed-and-unarmed.png)
+
+![Step 13: age by race](docs/screenshots/step-13-age-by-race.png)
+
+![Step 14: mental illness](docs/screenshots/step-14-mental-illness.png)
+
+![Step 15: threat level and fleeing](docs/screenshots/step-15-threat-and-fleeing.png)
+
 ## 📄 License
 
 GNU Affero General Public License v3.0, see [LICENSE][license].
