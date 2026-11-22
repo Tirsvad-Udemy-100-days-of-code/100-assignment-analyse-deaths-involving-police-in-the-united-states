@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; autonomous mode, not independent | pending |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; autonomous mode, not independent | [dea47d1] |
 
 ---
 
@@ -59,3 +59,4 @@ Go — every Mandatory criterion passes; opengrep reports 0 findings and pytest 
 
 [CODE-MIL-006]: ../../../src/fatal_force
 [QC-PY-001]: ../../../framework/qc/code/qc-programming-python.md
+[dea47d1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/dea47d1b5646eee585e97e15b22dec5ef0222581
