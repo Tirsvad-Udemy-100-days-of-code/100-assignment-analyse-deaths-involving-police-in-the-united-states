@@ -47,7 +47,13 @@ BOOLEAN_COLUMNS = ("signs_of_mental_illness", "body_camera")
 TRUE_LABEL = "TRUE"
 UNKNOWN_LABEL = "unknown"
 RACE_COLUMN = "race"
-UNKNOWN_FILL_COLUMNS = ("armed", RACE_COLUMN, "gender", "flee")
+ARMED_COLUMN = "armed"
+GENDER_COLUMN = "gender"
+FLEE_COLUMN = "flee"
+MANNER_COLUMN = "manner_of_death"
+THREAT_LEVEL_COLUMN = "threat_level"
+MENTAL_ILLNESS_COLUMN = BOOLEAN_COLUMNS[0]
+UNKNOWN_FILL_COLUMNS = (ARMED_COLUMN, RACE_COLUMN, GENDER_COLUMN, FLEE_COLUMN)
 
 # Race analysis: output columns and the readable label of each race code.
 RACE_CODE_COLUMN = "race_code"
@@ -63,6 +69,11 @@ RACE_LABELS = {
 }
 # Legend text of each census share column, in the order of SHARE_COLUMNS.
 SHARE_LABELS = ("White", "Black", "Native American", "Asian", "Hispanic")
+
+# Victim analysis: generic count columns and the label of an unarmed victim.
+VALUE_COLUMN = "value"
+COUNT_COLUMN = "count"
+UNARMED_LABEL = "unarmed"
 
 LINE_TERMINATOR_CR = "\r"
 LINE_TERMINATOR_CRLF = "\r\n"

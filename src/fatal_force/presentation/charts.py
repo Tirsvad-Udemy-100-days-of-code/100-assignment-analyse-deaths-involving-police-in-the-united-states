@@ -34,6 +34,7 @@ _FIT_COLOR = "black"
 _NOTE_MARGIN = 0.03
 _STACKED_FIGURE_SIZE = (14.0, 6.0)
 _DONUT_FIGURE_SIZE = (8.0, 6.0)
+_COUNT_FIGURE_SIZE = (10.0, 6.0)
 _DONUT_WIDTH = 0.4
 _DONUT_PERCENT_FORMAT = "%1.1f%%"
 _DONUT_PERCENT_DISTANCE = 0.8
@@ -41,7 +42,7 @@ _DONUT_LEGEND_LOCATION: Literal["center left"] = "center left"
 _DONUT_LEGEND_ANCHOR = (1.0, 0.5)
 
 
-def _add_source_note(figure: Figure, note: str = SOURCE_NOTE) -> None:
+def add_source_note(figure: Figure, note: str = SOURCE_NOTE) -> None:
     """@brief Put the data source at the bottom right of the figure.
 
     @param figure The figure to annotate.
@@ -85,7 +86,7 @@ def ranked_bar_chart(
     axes.tick_params(axis="y", labelsize=_BAR_FONT_SIZE)
     axes.set_title(title)
     axes.set_xlabel(x_label)
-    _add_source_note(figure)
+    add_source_note(figure)
     return figure
 
 
@@ -126,7 +127,7 @@ def dual_axis_line_chart(
     )
     left_axes.set_title(title)
     left_axes.legend(handles=[left_line, right_line], loc=_LEGEND_LOCATION)
-    _add_source_note(figure)
+    add_source_note(figure)
     return figure
 
 
@@ -171,7 +172,7 @@ def scatter_with_fit_chart(
     axes.set_xlabel(x_label)
     axes.set_ylabel(y_label)
     axes.legend()
-    _add_source_note(figure)
+    add_source_note(figure)
     return figure
 
 
@@ -212,7 +213,7 @@ def stacked_bar_chart(
     axes.set_title(title)
     axes.set_ylabel(y_label)
     axes.legend(loc=_LEGEND_LOCATION)
-    _add_source_note(figure)
+    add_source_note(figure)
     return figure
 
 
@@ -243,5 +244,42 @@ def donut_chart(
         bbox_to_anchor=_DONUT_LEGEND_ANCHOR,
     )
     axes.set_title(title)
-    _add_source_note(figure, FATALITIES_SOURCE_NOTE)
+    add_source_note(figure, FATALITIES_SOURCE_NOTE)
+    return figure
+
+
+def bar_chart(
+    frame: pl.DataFrame,
+    label_column: str,
+    value_column: str,
+    title: str,
+    y_label: str,
+    horizontal: bool = False,
+    note: str = FATALITIES_SOURCE_NOTE,
+) -> Figure:
+    """@brief Draw one bar per row with the value printed on the bar.
+
+    @param frame The frame holding the labels and values.
+    @param label_column The column with the bar labels.
+    @param value_column The column with the bar lengths.
+    @param title The chart title.
+    @param y_label The label of the value axis.
+    @param horizontal True to draw horizontal bars, first row on top.
+    @param note The source note; defaults to the fatalities note.
+    @return The figure with one axes.
+    """
+    labels = [str(label) for label in frame[label_column].to_list()]
+    values = frame[value_column].to_list()
+    figure = Figure(figsize=_COUNT_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    if horizontal:
+        container = axes.barh(labels, values, color=_BAR_COLOR)
+        axes.invert_yaxis()
+        axes.set_xlabel(y_label)
+    else:
+        container = axes.bar(labels, values, color=_BAR_COLOR)
+        axes.set_ylabel(y_label)
+    axes.bar_label(container, fontsize=_BAR_FONT_SIZE)
+    axes.set_title(title)
+    add_source_note(figure, note)
     return figure

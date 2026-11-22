@@ -6,6 +6,7 @@ from matplotlib.patches import Wedge
 
 from fatal_force.constants import FATALITIES_SOURCE_NOTE, SOURCE_NOTE
 from fatal_force.presentation.charts import (
+    bar_chart,
     donut_chart,
     dual_axis_line_chart,
     ranked_bar_chart,
@@ -118,3 +119,22 @@ def test_donut_chart_draws_one_wedge_per_row_with_legend_and_note() -> None:
     assert [t.get_text() for t in legend.get_texts()] == ["Black", "White", "Unknown"]
     assert any(text.get_text() == FATALITIES_SOURCE_NOTE for text in figure.texts)
     assert not _has_note(figure)
+
+
+def test_bar_chart_prints_counts_on_vertical_bars_with_fatalities_note() -> None:
+    frame = pl.DataFrame({"value": ["M", "F"], "count": [3, 2]})
+    figure = bar_chart(frame, "value", "count", "T", "Deaths")
+    axes = figure.axes[0]
+    assert len(axes.patches) == 2
+    assert [t.get_text() for t in axes.texts] == ["3", "2"]
+    assert axes.get_ylabel() == "Deaths"
+    assert any(text.get_text() == FATALITIES_SOURCE_NOTE for text in figure.texts)
+
+
+def test_bar_chart_horizontal_puts_label_on_x_axis_and_custom_note() -> None:
+    frame = pl.DataFrame({"value": ["gun", "knife"], "count": [5, 1]})
+    figure = bar_chart(frame, "value", "count", "T", "Deaths", True, note="N")
+    axes = figure.axes[0]
+    assert axes.get_xlabel() == "Deaths"
+    assert axes.yaxis_inverted()
+    assert any(text.get_text() == "N" for text in figure.texts)
