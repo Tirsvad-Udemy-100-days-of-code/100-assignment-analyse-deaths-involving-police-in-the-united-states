@@ -46,7 +46,23 @@ AGE_COLUMN = "age"
 BOOLEAN_COLUMNS = ("signs_of_mental_illness", "body_camera")
 TRUE_LABEL = "TRUE"
 UNKNOWN_LABEL = "unknown"
-UNKNOWN_FILL_COLUMNS = ("armed", "race", "gender", "flee")
+RACE_COLUMN = "race"
+UNKNOWN_FILL_COLUMNS = ("armed", RACE_COLUMN, "gender", "flee")
+
+# Race analysis: output columns and the readable label of each race code.
+RACE_CODE_COLUMN = "race_code"
+DEATHS_COLUMN = "deaths"
+RACE_LABELS = {
+    "W": "White",
+    "B": "Black",
+    "H": "Hispanic",
+    "A": "Asian",
+    "N": "Native American",
+    "O": "Other",
+    UNKNOWN_LABEL: "Unknown",
+}
+# Legend text of each census share column, in the order of SHARE_COLUMNS.
+SHARE_LABELS = ("White", "Black", "Native American", "Asian", "Hispanic")
 
 LINE_TERMINATOR_CR = "\r"
 LINE_TERMINATOR_CRLF = "\r\n"
@@ -54,3 +70,7 @@ LINE_TERMINATOR_LF = "\n"
 
 # Chart text shared by the figures.
 SOURCE_NOTE = "Source: US census data supplied with the course"
+FATALITIES_SOURCE_NOTE = (
+    "Source: The Washington Post database of fatal police shootings, "
+    "supplied with the course"
+)
