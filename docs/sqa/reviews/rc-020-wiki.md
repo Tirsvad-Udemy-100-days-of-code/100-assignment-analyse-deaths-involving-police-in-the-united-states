@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; verdict Go-with-conditions, criterion 14 pending; autonomous mode, not independent | [07d082c] |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Criterion 14 checked on the published wiki; verdict Go; autonomous mode, not independent | pending |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Criterion 14 checked on the published wiki; verdict Go; autonomous mode, not independent | [268dc10] |
 
 ---
 
@@ -59,3 +59,4 @@ Go — every Mandatory criterion passes, including criterion 14, checked on the 
 [WIKI-001]: ../../wiki
 [QC-WIKI-001]: ../../../framework/qc/artifacts/qc-wiki.md
 [07d082c]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/07d082c8204fdbb21fddb18aa264fa5e5e72777b
+[268dc10]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/268dc10df55756dc6ef1573d60ceb2784346becd
