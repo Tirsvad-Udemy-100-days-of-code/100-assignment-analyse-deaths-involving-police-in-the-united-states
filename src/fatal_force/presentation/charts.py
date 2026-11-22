@@ -3,12 +3,13 @@
 Figures are built without pyplot; the module never selects a backend.
 """
 
+from collections.abc import Sequence
 from typing import Literal
 
 import polars as pl
 from matplotlib.figure import Figure
 
-from fatal_force.constants import SOURCE_NOTE
+from fatal_force.constants import FATALITIES_SOURCE_NOTE, SOURCE_NOTE
 from fatal_force.domain.regression import fit_line
 
 _BAR_WIDTH = 9.0
@@ -31,16 +32,24 @@ _FIT_POINTS = 2
 _LEGEND_LOCATION: Literal["upper right"] = "upper right"
 _FIT_COLOR = "black"
 _NOTE_MARGIN = 0.03
+_STACKED_FIGURE_SIZE = (14.0, 6.0)
+_DONUT_FIGURE_SIZE = (8.0, 6.0)
+_DONUT_WIDTH = 0.4
+_DONUT_PERCENT_FORMAT = "%1.1f%%"
+_DONUT_PERCENT_DISTANCE = 0.8
+_DONUT_LEGEND_LOCATION: Literal["center left"] = "center left"
+_DONUT_LEGEND_ANCHOR = (1.0, 0.5)
 
 
-def _add_source_note(figure: Figure) -> None:
+def _add_source_note(figure: Figure, note: str = SOURCE_NOTE) -> None:
     """@brief Put the data source at the bottom right of the figure.
 
     @param figure The figure to annotate.
+    @param note The source text; defaults to the census note.
     """
     figure.tight_layout(rect=(0, _NOTE_MARGIN, 1, 1))
     figure.text(
-        _NOTE_X, _NOTE_Y, SOURCE_NOTE, ha="right", va="bottom", fontsize=_NOTE_FONT_SIZE
+        _NOTE_X, _NOTE_Y, note, ha="right", va="bottom", fontsize=_NOTE_FONT_SIZE
     )
 
 
@@ -163,4 +172,76 @@ def scatter_with_fit_chart(
     axes.set_ylabel(y_label)
     axes.legend()
     _add_source_note(figure)
+    return figure
+
+
+def stacked_bar_chart(
+    frame: pl.DataFrame,
+    label_column: str,
+    value_columns: Sequence[str],
+    series_labels: Sequence[str],
+    title: str,
+    y_label: str,
+) -> Figure:
+    """@brief Draw one stacked bar per row, one section per value column.
+
+    @param frame The frame holding the labels and the series.
+    @param label_column The column with the bar labels.
+    @param value_columns The columns stacked from the bottom, in order.
+    @param series_labels The legend text of each value column.
+    @param title The chart title.
+    @param y_label The label of the value axis.
+    @return The figure with one axes.
+    @throws ValueError When the columns and the labels differ in number.
+    """
+    if len(value_columns) != len(series_labels):
+        raise ValueError("value_columns and series_labels must have the same length")
+    labels = frame[label_column].to_list()
+    bottoms = [0.0] * len(labels)
+    figure = Figure(figsize=_STACKED_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    for column, series_label in zip(value_columns, series_labels, strict=True):
+        values = [value or 0.0 for value in frame[column].to_list()]
+        axes.bar(labels, values, bottom=bottoms, label=series_label)
+        bottoms = [
+            bottom + value for bottom, value in zip(bottoms, values, strict=True)
+        ]
+    axes.tick_params(
+        axis="x", labelrotation=_LABEL_ROTATION, labelsize=_LABEL_FONT_SIZE
+    )
+    axes.set_title(title)
+    axes.set_ylabel(y_label)
+    axes.legend(loc=_LEGEND_LOCATION)
+    _add_source_note(figure)
+    return figure
+
+
+def donut_chart(
+    frame: pl.DataFrame, label_column: str, value_column: str, title: str
+) -> Figure:
+    """@brief Draw a donut with the percentage of each slice and a legend.
+
+    @param frame The frame holding the labels and the counts.
+    @param label_column The column naming each slice.
+    @param value_column The column with the slice sizes.
+    @param title The chart title.
+    @return The figure with one axes.
+    """
+    labels = frame[label_column].to_list()
+    figure = Figure(figsize=_DONUT_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    wedges, _texts, _percents = axes.pie(
+        frame[value_column].to_list(),
+        autopct=_DONUT_PERCENT_FORMAT,
+        pctdistance=_DONUT_PERCENT_DISTANCE,
+        wedgeprops={"width": _DONUT_WIDTH},
+    )
+    axes.legend(
+        wedges,
+        labels,
+        loc=_DONUT_LEGEND_LOCATION,
+        bbox_to_anchor=_DONUT_LEGEND_ANCHOR,
+    )
+    axes.set_title(title)
+    _add_source_note(figure, FATALITIES_SOURCE_NOTE)
     return figure

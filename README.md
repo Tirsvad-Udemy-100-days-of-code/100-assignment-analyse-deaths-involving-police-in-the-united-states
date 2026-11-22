@@ -103,6 +103,12 @@ One screenshot per lecture step is added as each step is finished. Each step has
 
 ![Step 6: scatter plot with regression line](docs/screenshots/step-06-poverty-vs-graduation-scatter.png)
 
+### Steps 7 and 8: racial makeup and deaths by race
+
+![Step 7: racial makeup of each state](docs/screenshots/step-07-racial-makeup-by-state.png)
+
+![Step 8: people killed by race](docs/screenshots/step-08-deaths-by-race.png)
+
 ## 📄 License
 
 GNU Affero General Public License v3.0, see [LICENSE][license].

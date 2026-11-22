@@ -2,7 +2,16 @@
 
 import polars as pl
 
-from fatal_force.constants import HIGH_SCHOOL_COLUMN, POVERTY_COLUMN, STATE_COLUMN
+from fatal_force.constants import (
+    DEATHS_COLUMN,
+    HIGH_SCHOOL_COLUMN,
+    POVERTY_COLUMN,
+    RACE_CODE_COLUMN,
+    RACE_COLUMN,
+    RACE_LABELS,
+    SHARE_COLUMNS,
+    STATE_COLUMN,
+)
 
 
 def _mean_by_state(frame: pl.DataFrame, column: str, descending: bool) -> pl.DataFrame:
@@ -62,3 +71,37 @@ def correlation(frame: pl.DataFrame, left: str, right: str) -> float:
     """
     value = frame.select(pl.corr(left, right)).item()
     return float(value)
+
+
+def racial_makeup_by_state(share_race_city: pl.DataFrame) -> pl.DataFrame:
+    """@brief Mean share of each race per state, ignoring nulls.
+
+    @param share_race_city The cleaned frame with `state` and the share columns.
+    @return A frame with `state` and the five share columns, sorted by state.
+    """
+    return (
+        share_race_city.group_by(STATE_COLUMN)
+        .agg(pl.col(column).mean() for column in SHARE_COLUMNS)
+        .sort(STATE_COLUMN)
+    )
+
+
+def deaths_by_race(fatalities: pl.DataFrame) -> pl.DataFrame:
+    """@brief Count the deaths per race code, most deaths first.
+
+    @param fatalities The cleaned fatalities frame with the `race` column.
+    @return A frame with `race_code`, `race` (readable label) and `deaths`;
+        ties are ordered by code.
+    """
+    return (
+        fatalities.group_by(RACE_COLUMN)
+        .agg(pl.len().alias(DEATHS_COLUMN))
+        .rename({RACE_COLUMN: RACE_CODE_COLUMN})
+        .with_columns(
+            pl.col(RACE_CODE_COLUMN)
+            .replace_strict(RACE_LABELS, default=pl.col(RACE_CODE_COLUMN))
+            .alias(RACE_COLUMN)
+        )
+        .select(RACE_CODE_COLUMN, RACE_COLUMN, DEATHS_COLUMN)
+        .sort([DEATHS_COLUMN, RACE_CODE_COLUMN], descending=[True, False])
+    )
