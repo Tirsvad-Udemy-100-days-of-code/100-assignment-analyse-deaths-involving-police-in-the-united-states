@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-014]; autonomous mode, not independent | pending |
+| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [c8c2934] |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-014]; autonomous mode, not independent | [c8c2934] |
 
 Allowed Status values: `Proposed`, `Accepted`, `Rejected`, `Deprecated`, `Superseded by ADR-NNNN`.
 
@@ -48,3 +48,4 @@ Keep dataframe reading, cleaning and aggregation in `src/fatal_force/infrastruct
 [BC-001]: ../business-case.md
 [ADR-0002]: ./adr-0002-polars-and-optional-analysis-extra.md
 [RC-014]: ../sqa/reviews/rc-014-adr-0003.md
+[c8c2934]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/c8c2934f4268a3e360b352010189c52b9aa6c99e
