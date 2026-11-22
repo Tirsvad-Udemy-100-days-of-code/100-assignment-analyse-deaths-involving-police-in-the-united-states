@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [7a5f122] |
 | 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-003]; autonomous mode, not independent | [7a5f122] |
+| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 | Linked each gateway to its milestone on the git host | pending |
 
 ---
 
@@ -32,13 +32,13 @@ This plan schedules the seven gateways that deliver the Day 100 assignment again
 
 | Gateway | Document | Window | Decision date | Owner | Stories | Main deliverable | Milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Project Foundation | [MIL-001] | 2026-11-23 to 2026-11-25 | 2026-11-25 | S01 | none (plain analysis tasks) | Tooling, README, repository metadata | not yet synced |
-| Data Exploration and Cleaning | [MIL-002] | 2026-11-26 to 2026-11-27 | 2026-11-27 | S01 | none (plain analysis tasks) | Loaders, cleaners, steps 1 and 2 | not yet synced |
-| Poverty and Graduation Rates | [MIL-003] | 2026-11-28 to 2026-11-29 | 2026-11-29 | S01 | none (plain analysis tasks) | Steps 3 to 5 | not yet synced |
-| Racial Demographics | [MIL-004] | 2026-11-30 to 2026-12-01 | 2026-12-01 | S01 | none (plain analysis tasks) | Steps 6 and 7 | not yet synced |
-| Victim Characteristics | [MIL-005] | 2026-12-02 to 2026-12-03 | 2026-12-03 | S01 | none (plain analysis tasks) | Steps 8 to 12 | not yet synced |
-| Geography and Time | [MIL-006] | 2026-12-04 to 2026-12-05 | 2026-12-05 | S01 | none (plain analysis tasks) | Steps 13 to 16 and the journal | not yet synced |
-| Wiki and Release | [MIL-007] | 2026-12-06 to 2026-12-08 | 2026-12-08 | S01 | none (plain analysis tasks) | Three-language wiki, final checks, release | not yet synced |
+| Project Foundation | [MIL-001] | 2026-11-23 to 2026-11-25 | 2026-11-25 | S01 | none (plain analysis tasks) | Tooling, README, repository metadata | [M-001] |
+| Data Exploration and Cleaning | [MIL-002] | 2026-11-26 to 2026-11-27 | 2026-11-27 | S01 | none (plain analysis tasks) | Loaders, cleaners, steps 1 and 2 | [M-002] |
+| Poverty and Graduation Rates | [MIL-003] | 2026-11-28 to 2026-11-29 | 2026-11-29 | S01 | none (plain analysis tasks) | Steps 3 to 5 | [M-003] |
+| Racial Demographics | [MIL-004] | 2026-11-30 to 2026-12-01 | 2026-12-01 | S01 | none (plain analysis tasks) | Steps 6 and 7 | [M-004] |
+| Victim Characteristics | [MIL-005] | 2026-12-02 to 2026-12-03 | 2026-12-03 | S01 | none (plain analysis tasks) | Steps 8 to 12 | [M-005] |
+| Geography and Time | [MIL-006] | 2026-12-04 to 2026-12-05 | 2026-12-05 | S01 | none (plain analysis tasks) | Steps 13 to 16 and the journal | [M-006] |
+| Wiki and Release | [MIL-007] | 2026-12-06 to 2026-12-08 | 2026-12-08 | S01 | none (plain analysis tasks) | Three-language wiki, final checks, release | [M-007] |
 
 ```plantuml
 @startgantt
@@ -110,3 +110,10 @@ A No-Go on a gateway stops the chain and moves every later decision date, and th
 [MIL-007]: ./milestones/milestones\mil-007-wiki-and-release.md
 [RC-003]: ./sqa/reviews/rc-003-project-plan.md
 [7a5f122]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/7a5f122ced31642b5b69abdb4cf3a98e4941268f
+[M-001]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/722
+[M-002]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/723
+[M-003]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/724
+[M-004]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/725
+[M-005]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/726
+[M-006]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/727
+[M-007]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/728
