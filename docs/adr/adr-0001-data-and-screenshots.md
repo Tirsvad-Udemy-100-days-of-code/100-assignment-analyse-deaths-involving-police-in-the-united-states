@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-011]; autonomous mode, not independent | pending |
+| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [97a0c3e] |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-011]; autonomous mode, not independent | [97a0c3e] |
 
 Allowed Status values: `Proposed`, `Accepted`, `Rejected`, `Deprecated`, `Superseded by ADR-NNNN`.
 
@@ -47,3 +47,4 @@ Keep the course data in an ignored `data/` folder outside git and document how t
 
 [BC-001]: ../business-case.md
 [RC-011]: ../sqa/reviews/rc-011-adr-0001.md
+[97a0c3e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/97a0c3e2dbda6cc2d82cb8783b2fc5f3a2a9c60a
