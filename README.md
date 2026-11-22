@@ -93,6 +93,16 @@ One screenshot per lecture step is added as each step is finished. Each step has
 
 ![Step 2: data after cleaning](docs/screenshots/step-02-data-cleaning.png)
 
+### Steps 3 to 6: poverty and high school graduation
+
+![Step 3: poverty rate by state](docs/screenshots/step-03-poverty-rate.png)
+
+![Step 4: graduation rate by state](docs/screenshots/step-04-graduation-rate.png)
+
+![Step 5: poverty and graduation as lines](docs/screenshots/step-05-poverty-and-graduation-lines.png)
+
+![Step 6: scatter plot with regression line](docs/screenshots/step-06-poverty-vs-graduation-scatter.png)
+
 ## 📄 License
 
 GNU Affero General Public License v3.0, see [LICENSE][license].
