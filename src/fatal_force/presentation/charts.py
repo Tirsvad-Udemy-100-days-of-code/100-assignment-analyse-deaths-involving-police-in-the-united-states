@@ -1,0 +1,166 @@
+"""@brief Matplotlib charts for the poverty and graduation analysis.
+
+Figures are built without pyplot; the module never selects a backend.
+"""
+
+from typing import Literal
+
+import polars as pl
+from matplotlib.figure import Figure
+
+from fatal_force.constants import SOURCE_NOTE
+from fatal_force.domain.regression import fit_line
+
+_BAR_WIDTH = 9.0
+_BAR_ROW_HEIGHT = 0.28
+_BAR_BASE_HEIGHT = 2.0
+_BAR_FONT_SIZE = 8
+_HIGHLIGHT_COLOR = "tab:red"
+_BAR_COLOR = "tab:blue"
+_LEFT_COLOR = "tab:red"
+_RIGHT_COLOR = "tab:blue"
+_LINE_FIGURE_SIZE = (12.0, 6.0)
+_SCATTER_FIGURE_SIZE = (8.0, 6.0)
+_LABEL_ROTATION = 90
+_LABEL_FONT_SIZE = 8
+_POINT_ALPHA = 0.8
+_NOTE_X = 0.99
+_NOTE_Y = 0.01
+_NOTE_FONT_SIZE = 8
+_FIT_POINTS = 2
+_LEGEND_LOCATION: Literal["upper right"] = "upper right"
+_FIT_COLOR = "black"
+_NOTE_MARGIN = 0.03
+
+
+def _add_source_note(figure: Figure) -> None:
+    """@brief Put the data source at the bottom right of the figure.
+
+    @param figure The figure to annotate.
+    """
+    figure.tight_layout(rect=(0, _NOTE_MARGIN, 1, 1))
+    figure.text(
+        _NOTE_X, _NOTE_Y, SOURCE_NOTE, ha="right", va="bottom", fontsize=_NOTE_FONT_SIZE
+    )
+
+
+def ranked_bar_chart(
+    frame: pl.DataFrame,
+    label_column: str,
+    value_column: str,
+    title: str,
+    x_label: str,
+    highlight_first: int = 1,
+) -> Figure:
+    """@brief Draw a horizontal bar chart in the order of the frame, first row on top.
+
+    @param frame The frame holding the labels and values.
+    @param label_column The column with the bar labels.
+    @param value_column The column with the bar lengths.
+    @param title The chart title.
+    @param x_label The label of the value axis.
+    @param highlight_first How many leading bars get the highlight color.
+    @return The figure with one axes.
+    """
+    labels = frame[label_column].to_list()
+    values = frame[value_column].to_list()
+    height = _BAR_BASE_HEIGHT + _BAR_ROW_HEIGHT * len(labels)
+    figure = Figure(figsize=(_BAR_WIDTH, height), layout="constrained")
+    axes = figure.subplots()
+    colors = [
+        _HIGHLIGHT_COLOR if index < highlight_first else _BAR_COLOR
+        for index in range(len(labels))
+    ]
+    axes.barh(labels, values, color=colors)
+    axes.invert_yaxis()
+    axes.tick_params(axis="y", labelsize=_BAR_FONT_SIZE)
+    axes.set_title(title)
+    axes.set_xlabel(x_label)
+    _add_source_note(figure)
+    return figure
+
+
+def dual_axis_line_chart(
+    frame: pl.DataFrame,
+    label_column: str,
+    left_column: str,
+    right_column: str,
+    title: str,
+    left_label: str,
+    right_label: str,
+) -> Figure:
+    """@brief Draw two lines on separate y axes over the labels in the x axis.
+
+    @param frame The frame holding the labels and both series.
+    @param label_column The column with the x axis labels.
+    @param left_column The series drawn against the left axis.
+    @param right_column The series drawn against the right axis.
+    @param title The chart title.
+    @param left_label The label of the left axis and its legend entry.
+    @param right_label The label of the right axis and its legend entry.
+    @return The figure with a left and a right axes.
+    """
+    labels = frame[label_column].to_list()
+    figure = Figure(figsize=_LINE_FIGURE_SIZE, layout="constrained")
+    left_axes = figure.subplots()
+    right_axes = left_axes.twinx()
+    (left_line,) = left_axes.plot(
+        labels, frame[left_column].to_list(), color=_LEFT_COLOR, label=left_label
+    )
+    (right_line,) = right_axes.plot(
+        labels, frame[right_column].to_list(), color=_RIGHT_COLOR, label=right_label
+    )
+    left_axes.set_ylabel(left_label, color=_LEFT_COLOR)
+    right_axes.set_ylabel(right_label, color=_RIGHT_COLOR)
+    left_axes.tick_params(
+        axis="x", labelrotation=_LABEL_ROTATION, labelsize=_LABEL_FONT_SIZE
+    )
+    left_axes.set_title(title)
+    left_axes.legend(handles=[left_line, right_line], loc=_LEGEND_LOCATION)
+    _add_source_note(figure)
+    return figure
+
+
+def scatter_with_fit_chart(
+    frame: pl.DataFrame,
+    x_column: str,
+    y_column: str,
+    title: str,
+    x_label: str,
+    y_label: str,
+    label_column: str,
+) -> Figure:
+    """@brief Draw a scatter plot with its least-squares line and r.
+
+    @param frame The frame holding the points.
+    @param x_column The column for the x values.
+    @param y_column The column for the y values.
+    @param title The chart title.
+    @param x_label The label of the x axis.
+    @param y_label The label of the y axis.
+    @param label_column The column naming each point; shown next to it.
+    @return The figure with one axes.
+    @throws ValueError When the frame has fewer than 2 rows.
+    """
+    xs = frame[x_column].to_list()
+    ys = frame[y_column].to_list()
+    labels = frame[label_column].to_list()
+    fit = fit_line(xs, ys)
+    figure = Figure(figsize=_SCATTER_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    axes.scatter(xs, ys, alpha=_POINT_ALPHA, label="States")
+    for x, y, text in zip(xs, ys, labels, strict=True):
+        axes.annotate(text, (x, y), fontsize=_LABEL_FONT_SIZE)
+    line_xs = [min(xs), max(xs)][:_FIT_POINTS]
+    axes.plot(
+        line_xs,
+        [fit.slope * x + fit.intercept for x in line_xs],
+        color=_FIT_COLOR,
+        label=f"Linear fit (r = {fit.r_value:.2f})",
+    )
+    axes.set_title(title)
+    axes.set_xlabel(x_label)
+    axes.set_ylabel(y_label)
+    axes.legend()
+    _add_source_note(figure)
+    return figure

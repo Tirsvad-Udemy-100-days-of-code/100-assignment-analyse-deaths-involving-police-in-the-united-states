@@ -51,3 +51,6 @@ UNKNOWN_FILL_COLUMNS = ("armed", "race", "gender", "flee")
 LINE_TERMINATOR_CR = "\r"
 LINE_TERMINATOR_CRLF = "\r\n"
 LINE_TERMINATOR_LF = "\n"
+
+# Chart text shared by the figures.
+SOURCE_NOTE = "Source: US census data supplied with the course"
