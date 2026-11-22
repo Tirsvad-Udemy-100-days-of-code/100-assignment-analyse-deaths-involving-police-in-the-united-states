@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; verdict Go-with-conditions, criterion 14 pending; autonomous mode, not independent | pending |
+| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; verdict Go-with-conditions, criterion 14 pending; autonomous mode, not independent | [07d082c] |
 
 ---
 
@@ -57,3 +57,4 @@ Go-with-conditions — every Mandatory criterion passes except criterion 14, whi
 
 [WIKI-001]: ../../wiki
 [QC-WIKI-001]: ../../../framework/qc/artifacts/qc-wiki.md
+[07d082c]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/07d082c8204fdbb21fddb18aa264fa5e5e72777b
