@@ -12,7 +12,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-003]; autonomous mode, not independent | [7a5f122] |
-| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 | Linked each gateway to its milestone on the git host | pending |
+| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 | Linked each gateway to its milestone on the git host | [07d082c] |
 
 ---
 
@@ -117,3 +117,4 @@ A No-Go on a gateway stops the chain and moves every later decision date, and th
 [M-005]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/726
 [M-006]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/727
 [M-007]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/milestone/728
+[07d082c]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/07d082c8204fdbb21fddb18aa264fa5e5e72777b
