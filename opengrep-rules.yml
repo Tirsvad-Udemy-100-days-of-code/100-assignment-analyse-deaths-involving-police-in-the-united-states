@@ -1,0 +1,38 @@
+rules:
+  - id: python-no-eval-exec
+    languages: [python]
+    severity: ERROR
+    message: eval and exec run arbitrary code; do not use them.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
+  - id: python-no-shell-true
+    languages: [python]
+    severity: ERROR
+    message: subprocess with shell=True allows command injection.
+    pattern: subprocess.$FUNC(..., shell=True, ...)
+  - id: python-no-pickle-load
+    languages: [python]
+    severity: ERROR
+    message: Unpickling untrusted data runs arbitrary code.
+    pattern-either:
+      - pattern: pickle.load(...)
+      - pattern: pickle.loads(...)
+  - id: python-no-hardcoded-secret
+    languages: [python]
+    severity: ERROR
+    message: A secret looks hard coded; read it from the environment outside the project code.
+    patterns:
+      - pattern: $NAME = "..."
+      - metavariable-regex:
+          metavariable: $NAME
+          regex: (?i).*(password|secret|token|api_key).*
+  - id: python-no-bare-except
+    languages: [python]
+    severity: WARNING
+    message: A bare except hides errors; catch the narrowest type.
+    pattern: |
+      try:
+          ...
+      except:
+          ...
