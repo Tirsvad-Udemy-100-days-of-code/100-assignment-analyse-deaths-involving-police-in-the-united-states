@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-008]; autonomous mode, not independent | pending |
+| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [7a5f122] |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-008]; autonomous mode, not independent | [7a5f122] |
 
 ---
 
@@ -71,3 +71,4 @@ Tested counting functions and notebook sections with screenshots for gender, age
 
 [BC-001]: ../business-case.md
 [RC-008]: ../sqa/reviews/rc-008-mil-005.md
+[7a5f122]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/7a5f122ced31642b5b69abdb4cf3a98e4941268f

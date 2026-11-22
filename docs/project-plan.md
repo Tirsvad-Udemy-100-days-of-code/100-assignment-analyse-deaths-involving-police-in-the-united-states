@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | pending |
-| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-003]; autonomous mode, not independent | pending |
+| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [7a5f122] |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Accepted after review [RC-003]; autonomous mode, not independent | [7a5f122] |
 
 ---
 
@@ -109,3 +109,4 @@ A No-Go on a gateway stops the chain and moves every later decision date, and th
 [MIL-006]: ./milestones/milestones\mil-006-geography-and-time.md
 [MIL-007]: ./milestones/milestones\mil-007-wiki-and-release.md
 [RC-003]: ./sqa/reviews/rc-003-project-plan.md
+[7a5f122]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/100-assignment-analyse-deaths-involving-police-in-the-united-states/commit/7a5f122ced31642b5b69abdb4cf3a98e4941268f
