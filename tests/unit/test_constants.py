@@ -3,7 +3,7 @@ from fatal_force import constants
 
 def test_data_file_names_are_csv_files() -> None:
     names = [
-        constants.POLICE_KILLINGS_FILE,
+        constants.FATALITIES_FILE,
         constants.SHARE_RACE_BY_CITY_FILE,
         constants.MEDIAN_HOUSEHOLD_INCOME_FILE,
         constants.POVERTY_FILE,
