@@ -1,3 +1,5 @@
+from datetime import date
+
 import polars as pl
 import pytest
 from matplotlib.container import BarContainer
@@ -9,6 +11,8 @@ from fatal_force.presentation.charts import (
     bar_chart,
     donut_chart,
     dual_axis_line_chart,
+    grouped_bar_chart,
+    line_chart,
     ranked_bar_chart,
     scatter_with_fit_chart,
     stacked_bar_chart,
@@ -138,3 +142,47 @@ def test_bar_chart_horizontal_puts_label_on_x_axis_and_custom_note() -> None:
     assert axes.get_xlabel() == "Deaths"
     assert axes.yaxis_inverted()
     assert any(text.get_text() == "N" for text in figure.texts)
+
+
+def _timeline() -> pl.DataFrame:
+    return pl.DataFrame(
+        {
+            "month": [date(2015, 1, 1), date(2015, 2, 1), date(2015, 3, 1)],
+            "deaths": [5, 7, 6],
+            "smooth": [None, 6.0, 6.5],
+        }
+    )
+
+
+def test_line_chart_draws_series_and_smoothed_line_with_note() -> None:
+    figure = line_chart(_timeline(), "month", "deaths", "T", "Deaths", "smooth")
+    axes = figure.axes[0]
+    assert len(axes.lines) == 2
+    assert axes.get_title() == "T"
+    assert axes.get_ylabel() == "Deaths"
+    assert axes.get_legend() is not None
+    assert any(text.get_text() == FATALITIES_SOURCE_NOTE for text in figure.texts)
+
+
+def test_line_chart_without_smooth_column_draws_one_line() -> None:
+    figure = line_chart(_timeline(), "month", "deaths", "T", "Deaths")
+    assert len(figure.axes[0].lines) == 1
+    assert figure.axes[0].get_legend() is None
+
+
+def test_grouped_bar_chart_draws_one_bar_per_row_and_series() -> None:
+    frame = pl.DataFrame({"city": ["A", "B"], "W": [1.0, 2.0], "B": [3.0, None]})
+    figure = grouped_bar_chart(frame, "city", ["W", "B"], ["White", "Black"], "T", "R")
+    axes = figure.axes[0]
+    assert len(axes.containers) == 2
+    assert [len(c) for c in axes.containers] == [2, 2]
+    assert [t.get_text() for t in axes.get_xticklabels()] == ["A", "B"]
+    legend = axes.get_legend()
+    assert legend is not None
+    assert [t.get_text() for t in legend.get_texts()] == ["White", "Black"]
+
+
+def test_grouped_bar_chart_rejects_mismatched_labels() -> None:
+    frame = pl.DataFrame({"city": ["A"], "W": [1.0]})
+    with pytest.raises(ValueError, match="same length"):
+        grouped_bar_chart(frame, "city", ["W"], [], "T", "R")

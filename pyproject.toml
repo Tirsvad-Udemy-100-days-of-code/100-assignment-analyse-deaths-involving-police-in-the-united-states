@@ -16,6 +16,7 @@ analysis = [
     "polars>=1.0",
     "matplotlib>=3.9",
     "plotly>=5.24",
+    "kaleido>=1.0",
     "jupyterlab>=4.2",
 ]
 dev = [

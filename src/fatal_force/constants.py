@@ -75,6 +75,43 @@ VALUE_COLUMN = "value"
 COUNT_COLUMN = "count"
 UNARMED_LABEL = "unarmed"
 
+# Geography analysis: census place-type suffixes dropped when matching city names.
+CITY_SUFFIXES = (
+    "city and borough",
+    "urban county",
+    "municipality",
+    "township",
+    "borough",
+    "village",
+    "town",
+    "city",
+    "cdp",
+    "(balance)",
+)
+# Race groups compared with the census, and the census column of each.
+RACE_GROUPS = ("W", "B", "H", "A", "N")
+RACE_SHARE_COLUMNS = {
+    "W": "share_white",
+    "B": "share_black",
+    "H": "share_hispanic",
+    "A": "share_asian",
+    "N": "share_native_american",
+}
+VICTIM_SHARE_COLUMN = "victim_share"
+POPULATION_SHARE_COLUMN = "population_share"
+RATIO_COLUMN = "ratio"
+CITY_LABEL_COLUMN = "city_label"
+DEFAULT_TOP_CITIES = 10
+
+# Timeline analysis: output columns.
+MONTH_COLUMN = "month"
+YEAR_COLUMN = "year"
+ROLLING_MEAN_SUFFIX = "_rolling_mean"
+
+# Map figure size in pixels.
+MAP_WIDTH = 1100
+MAP_HEIGHT = 650
+
 LINE_TERMINATOR_CR = "\r"
 LINE_TERMINATOR_CRLF = "\r\n"
 LINE_TERMINATOR_LF = "\n"

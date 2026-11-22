@@ -35,6 +35,9 @@ _NOTE_MARGIN = 0.03
 _STACKED_FIGURE_SIZE = (14.0, 6.0)
 _DONUT_FIGURE_SIZE = (8.0, 6.0)
 _COUNT_FIGURE_SIZE = (10.0, 6.0)
+_RAW_LINE_ALPHA = 0.5
+_SMOOTH_LINE_WIDTH = 2.5
+_GROUP_WIDTH = 0.8
 _DONUT_WIDTH = 0.4
 _DONUT_PERCENT_FORMAT = "%1.1f%%"
 _DONUT_PERCENT_DISTANCE = 0.8
@@ -282,4 +285,89 @@ def bar_chart(
     axes.bar_label(container, fontsize=_BAR_FONT_SIZE)
     axes.set_title(title)
     add_source_note(figure, note)
+    return figure
+
+
+def line_chart(
+    frame: pl.DataFrame,
+    x_column: str,
+    y_column: str,
+    title: str,
+    y_label: str,
+    smooth_column: str | None = None,
+) -> Figure:
+    """@brief Draw a series over a date axis with an optional smoothed line.
+
+    @param frame The frame holding the dates and the series.
+    @param x_column The date column for the x axis.
+    @param y_column The series drawn as a thin line.
+    @param title The chart title.
+    @param y_label The label of the value axis.
+    @param smooth_column The smoothed series drawn thicker; none when None.
+    @return The figure with one axes.
+    """
+    dates = frame[x_column].to_list()
+    figure = Figure(figsize=_LINE_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    axes.plot(dates, frame[y_column].to_list(), alpha=_RAW_LINE_ALPHA, label=y_label)
+    if smooth_column is not None:
+        axes.plot(
+            dates,
+            frame[smooth_column].to_list(),
+            color=_FIT_COLOR,
+            linewidth=_SMOOTH_LINE_WIDTH,
+            label=smooth_column,
+        )
+        axes.legend(loc=_LEGEND_LOCATION)
+    axes.set_title(title)
+    axes.set_ylabel(y_label)
+    add_source_note(figure, FATALITIES_SOURCE_NOTE)
+    return figure
+
+
+def grouped_bar_chart(
+    frame: pl.DataFrame,
+    label_column: str,
+    value_columns: Sequence[str],
+    series_labels: Sequence[str],
+    title: str,
+    y_label: str,
+) -> Figure:
+    """@brief Draw one group of side-by-side bars per row, one bar per value column.
+
+    @param frame The frame holding the labels and the series.
+    @param label_column The column with the group labels.
+    @param value_columns The columns drawn as bars of each group, in order.
+    @param series_labels The legend text of each value column.
+    @param title The chart title.
+    @param y_label The label of the value axis.
+    @return The figure with one axes; a null value is drawn as 0.
+    @throws ValueError When the columns and the labels differ in number.
+    """
+    if len(value_columns) != len(series_labels):
+        raise ValueError("value_columns and series_labels must have the same length")
+    labels = [str(label) for label in frame[label_column].to_list()]
+    bar_width = _GROUP_WIDTH / len(value_columns)
+    centres = [float(index) for index in range(len(labels))]
+    figure = Figure(figsize=_STACKED_FIGURE_SIZE, layout="constrained")
+    axes = figure.subplots()
+    for position, (column, series_label) in enumerate(
+        zip(value_columns, series_labels, strict=True)
+    ):
+        offset = (position - (len(value_columns) - 1) / 2) * bar_width
+        values = [value or 0.0 for value in frame[column].to_list()]
+        axes.bar(
+            [centre + offset for centre in centres],
+            values,
+            width=bar_width,
+            label=series_label,
+        )
+    axes.set_xticks(centres, labels)
+    axes.tick_params(
+        axis="x", labelrotation=_LABEL_ROTATION, labelsize=_LABEL_FONT_SIZE
+    )
+    axes.set_title(title)
+    axes.set_ylabel(y_label)
+    axes.legend(loc=_LEGEND_LOCATION)
+    add_source_note(figure, FATALITIES_SOURCE_NOTE)
     return figure

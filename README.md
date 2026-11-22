@@ -125,6 +125,16 @@ One screenshot per lecture step is added as each step is finished. Each step has
 
 ![Step 15: threat level and fleeing](docs/screenshots/step-15-threat-and-fleeing.png)
 
+### Steps 16 to 19: places and time
+
+![Step 16: ten cities with the most killings](docs/screenshots/step-16-top-cities.png)
+
+![Step 17: ratio by race in the top ten cities](docs/screenshots/step-17-rate-by-race-top-cities.png)
+
+![Step 18: map of killings by state](docs/screenshots/step-18-deaths-by-state-map.png)
+
+![Step 19: killings over time](docs/screenshots/step-19-deaths-over-time.png)
+
 ## 📄 License
 
 GNU Affero General Public License v3.0, see [LICENSE][license].
