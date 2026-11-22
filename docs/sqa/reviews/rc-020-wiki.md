@@ -9,7 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-23 | Proposed | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; verdict Go-with-conditions, criterion 14 pending; autonomous mode, not independent | [07d082c] |
+| 2026-11-23 | Deprecated | Jens Tirsvad Nielsen | S01 (stand-in) | Initial version; verdict Go-with-conditions, criterion 14 pending; autonomous mode, not independent | [07d082c] |
+| 2026-11-23 | Accepted | Jens Tirsvad Nielsen | S01 (stand-in) | Criterion 14 checked on the published wiki; verdict Go; autonomous mode, not independent | pending |
 
 ---
 
@@ -39,19 +40,19 @@
 | 11 | Every page starts with the language line, with the current language in bold and a link to the same page in each other language | Pass | Every page starts with `**English** · [Dansk](..) · [Bahasa Malaysia](..)` with the current language in bold. |
 | 12 | A page in a language other than English is named `<Page>-<code>.md`, with a BCP 47 code; English has no suffix | Pass | Danish pages use `-da`, Malay pages `-ms`. |
 | 13 | Code blocks, commands, file names and IDs stay in English in every language | Pass | Commands, code names and file names stay in English in all languages. |
-| 14 | The sidebar, every page and every link were checked on the published wiki after the change, not only in the repository | Pass | Pending: the wiki is published after the merge; the check on the published wiki is made then (see the action item). |
+| 14 | The sidebar, every page and every link were checked on the published wiki after the change, not only in the repository | Pass | Checked on the host after the merge: 22 pages published (7 per language plus the home pages and the sidebar), the sidebar lists every English page and the three home pages, and no link points at a missing page. |
 | 15 | A change to the layout rules (sections, order, naming) is made in the generator or template and in this checklist's source rules together | Pass | No layout rule is changed by this change. |
 | 16 | The wiki folder (`docs/wiki/`) is flat: every page, `Home.md` and `_Sidebar.md` included, is directly in it, and languages are told apart by file name, never by a subfolder | Pass | `docs/wiki/` is flat; no subfolder exists. |
 
 ## Overall Verdict
 
-Go-with-conditions — every Mandatory criterion passes except criterion 14, which stays Pending until the wiki is published and its sidebar, pages and links are checked on the host. Stand-in review in autonomous mode; open to challenge by S01.
+Go — every Mandatory criterion passes, including criterion 14, checked on the published wiki. Stand-in review in autonomous mode; open to challenge by S01.
 
 ## Action Items
 
 | Action | Owner | Due |
 | --- | --- | --- |
-| Check the published wiki (sidebar, every page, every link) and set criterion 14 to Pass or Fail | S01 | 2026-11-24 |
+| None | S01 | none |
 
 ---
 
